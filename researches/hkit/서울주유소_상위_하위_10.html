@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_fb3f960f79114881944ec8086babfb82 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_fb3f960f79114881944ec8086babfb82" ></div>
+        
+</body>
+<script>    
+    
+            var map_fb3f960f79114881944ec8086babfb82 = L.map(
+                "map_fb3f960f79114881944ec8086babfb82",
+                {
+                    center: [37.522073773256515, 126.98434690968251],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3c18e16b9f6d45a697e30a8a8e84b18a = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+            var circle_marker_e8eda0db080c430f8e054d1145fce374 = L.circleMarker(
+                [37.5760111, 126.9806619],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_3a51296d38394c9ab2108d7fbd8250ec = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3907265e443a406ebcdadbbd3462af28 = $(`<div id="html_3907265e443a406ebcdadbbd3462af28" style="width: 100.0%; height: 100.0%;">경복궁주유소</div>`)[0];
+            popup_3a51296d38394c9ab2108d7fbd8250ec.setContent(html_3907265e443a406ebcdadbbd3462af28);
+        
+
+        circle_marker_e8eda0db080c430f8e054d1145fce374.bindPopup(popup_3a51296d38394c9ab2108d7fbd8250ec)
+        ;
+
+        
+    
+    
+            var circle_marker_fe957ab02ab34200be3bdeb0dc4b7176 = L.circleMarker(
+                [37.5359518, 127.0061296],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_865f3791e9764a04af1d537da67a42b7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_13788062df6a41b094001e1f4a8f5aff = $(`<div id="html_13788062df6a41b094001e1f4a8f5aff" style="width: 100.0%; height: 100.0%;">에너비스</div>`)[0];
+            popup_865f3791e9764a04af1d537da67a42b7.setContent(html_13788062df6a41b094001e1f4a8f5aff);
+        
+
+        circle_marker_fe957ab02ab34200be3bdeb0dc4b7176.bindPopup(popup_865f3791e9764a04af1d537da67a42b7)
+        ;
+
+        
+    
+    
+            var circle_marker_c725a2f6c78748738df6c922a9974432 = L.circleMarker(
+                [37.5346573, 127.0060631],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_dd3825f1adc14c999e6b236451156b2b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_49c2b0714195419cac312df2acff4e8b = $(`<div id="html_49c2b0714195419cac312df2acff4e8b" style="width: 100.0%; height: 100.0%;">한남지점</div>`)[0];
+            popup_dd3825f1adc14c999e6b236451156b2b.setContent(html_49c2b0714195419cac312df2acff4e8b);
+        
+
+        circle_marker_c725a2f6c78748738df6c922a9974432.bindPopup(popup_dd3825f1adc14c999e6b236451156b2b)
+        ;
+
+        
+    
+    
+            var circle_marker_8c402ba3412a4e4a8ebbfd42608909c6 = L.circleMarker(
+                [37.5744645, 126.9666181],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_e1a186df1f2f43d983c3140a79058b5f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_70a6f2b31c0e4a34a9556a926b519cc0 = $(`<div id="html_70a6f2b31c0e4a34a9556a926b519cc0" style="width: 100.0%; height: 100.0%;">(주)대양씨앤씨 사직주유소</div>`)[0];
+            popup_e1a186df1f2f43d983c3140a79058b5f.setContent(html_70a6f2b31c0e4a34a9556a926b519cc0);
+        
+
+        circle_marker_8c402ba3412a4e4a8ebbfd42608909c6.bindPopup(popup_e1a186df1f2f43d983c3140a79058b5f)
+        ;
+
+        
+    
+    
+            var circle_marker_75a503b78e5a4645b79c1e6d5626013e = L.circleMarker(
+                [37.586068, 127.0010581],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_a055475dd20646079b8a5bc55a95f5bd = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a34c99d006444f7abc7556d0e25e3233 = $(`<div id="html_a34c99d006444f7abc7556d0e25e3233" style="width: 100.0%; height: 100.0%;">(주)중앙에너비스 혜화주유소</div>`)[0];
+            popup_a055475dd20646079b8a5bc55a95f5bd.setContent(html_a34c99d006444f7abc7556d0e25e3233);
+        
+
+        circle_marker_75a503b78e5a4645b79c1e6d5626013e.bindPopup(popup_a055475dd20646079b8a5bc55a95f5bd)
+        ;
+
+        
+    
+    
+            var circle_marker_721717f0e39945758d7b07f29236d1a2 = L.circleMarker(
+                [37.5193396, 127.0363736],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_0d9d6d111c4941459921577dd9f86d5b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bf4fe615163a48be9abebf6e90244b16 = $(`<div id="html_bf4fe615163a48be9abebf6e90244b16" style="width: 100.0%; height: 100.0%;">뉴서울(강남)</div>`)[0];
+            popup_0d9d6d111c4941459921577dd9f86d5b.setContent(html_bf4fe615163a48be9abebf6e90244b16);
+        
+
+        circle_marker_721717f0e39945758d7b07f29236d1a2.bindPopup(popup_0d9d6d111c4941459921577dd9f86d5b)
+        ;
+
+        
+    
+    
+            var circle_marker_beb67f95342a460e8707d49179736cdc = L.circleMarker(
+                [37.5616483, 126.9971419],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_479534369a35462287b34472ff7040b5 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_014b7f439c244709b2ed012b385515ab = $(`<div id="html_014b7f439c244709b2ed012b385515ab" style="width: 100.0%; height: 100.0%;">SK에너지(주) 퇴계로주유소</div>`)[0];
+            popup_479534369a35462287b34472ff7040b5.setContent(html_014b7f439c244709b2ed012b385515ab);
+        
+
+        circle_marker_beb67f95342a460e8707d49179736cdc.bindPopup(popup_479534369a35462287b34472ff7040b5)
+        ;
+
+        
+    
+    
+            var circle_marker_537846d5d7f64d92acfd1f034103c827 = L.circleMarker(
+                [37.5598189, 126.9946111],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_26cc7d12babd43b4a767bfee36d02da4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8299c7b814fb4d299e13239091b666f8 = $(`<div id="html_8299c7b814fb4d299e13239091b666f8" style="width: 100.0%; height: 100.0%;">필동주유소</div>`)[0];
+            popup_26cc7d12babd43b4a767bfee36d02da4.setContent(html_8299c7b814fb4d299e13239091b666f8);
+        
+
+        circle_marker_537846d5d7f64d92acfd1f034103c827.bindPopup(popup_26cc7d12babd43b4a767bfee36d02da4)
+        ;
+
+        
+    
+    
+            var circle_marker_4dc0c111fafa40499a8999344763ee8a = L.circleMarker(
+                [37.5522895, 126.9689354],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_af9483293f354056aad19729f51d3e04 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ba808cd1920d411592b098283d73e4bc = $(`<div id="html_ba808cd1920d411592b098283d73e4bc" style="width: 100.0%; height: 100.0%;">서계주유소</div>`)[0];
+            popup_af9483293f354056aad19729f51d3e04.setContent(html_ba808cd1920d411592b098283d73e4bc);
+        
+
+        circle_marker_4dc0c111fafa40499a8999344763ee8a.bindPopup(popup_af9483293f354056aad19729f51d3e04)
+        ;
+
+        
+    
+    
+            var circle_marker_e85728253a404e9d9386261f028ffe1e = L.circleMarker(
+                [37.5583477, 126.9720901],
+                {"bubblingMouseEvents": true, "color": "#CD3181", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#CD3181", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_634fa89bee4d478b8b30185ea78c6b6e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e2ef333b05c74786baeb4a661aca3203 = $(`<div id="html_e2ef333b05c74786baeb4a661aca3203" style="width: 100.0%; height: 100.0%;">서남주유소</div>`)[0];
+            popup_634fa89bee4d478b8b30185ea78c6b6e.setContent(html_e2ef333b05c74786baeb4a661aca3203);
+        
+
+        circle_marker_e85728253a404e9d9386261f028ffe1e.bindPopup(popup_634fa89bee4d478b8b30185ea78c6b6e)
+        ;
+
+        
+    
+    
+            var circle_marker_06887914254b49d7a9841e1e478d8ab2 = L.circleMarker(
+                [37.4599063, 127.0420601],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_268f2e807a234536a161b78f4d832706 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ba1b248080904f2d8d6c8ca5170cd18c = $(`<div id="html_ba1b248080904f2d8d6c8ca5170cd18c" style="width: 100.0%; height: 100.0%;">만남의광장주유소</div>`)[0];
+            popup_268f2e807a234536a161b78f4d832706.setContent(html_ba1b248080904f2d8d6c8ca5170cd18c);
+        
+
+        circle_marker_06887914254b49d7a9841e1e478d8ab2.bindPopup(popup_268f2e807a234536a161b78f4d832706)
+        ;
+
+        
+    
+    
+            var circle_marker_89dfb99705b24e95b85bc6fbf49393f1 = L.circleMarker(
+                [37.5015666, 126.8987908],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_ce747b703664480d8c88944550daa9e9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b70096f8d235493596ca29af6f80c9b1 = $(`<div id="html_b70096f8d235493596ca29af6f80c9b1" style="width: 100.0%; height: 100.0%;">남서울고속주유소</div>`)[0];
+            popup_ce747b703664480d8c88944550daa9e9.setContent(html_b70096f8d235493596ca29af6f80c9b1);
+        
+
+        circle_marker_89dfb99705b24e95b85bc6fbf49393f1.bindPopup(popup_ce747b703664480d8c88944550daa9e9)
+        ;
+
+        
+    
+    
+            var circle_marker_c96d6b986adb4a48ac3c29d84496b870 = L.circleMarker(
+                [37.5076563, 126.900191],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_db6f1a0cb8e4450aa35d3861df71b4dc = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c46d330992774d85b4d5dcbcaca46f1c = $(`<div id="html_c46d330992774d85b4d5dcbcaca46f1c" style="width: 100.0%; height: 100.0%;">도림주유소</div>`)[0];
+            popup_db6f1a0cb8e4450aa35d3861df71b4dc.setContent(html_c46d330992774d85b4d5dcbcaca46f1c);
+        
+
+        circle_marker_c96d6b986adb4a48ac3c29d84496b870.bindPopup(popup_db6f1a0cb8e4450aa35d3861df71b4dc)
+        ;
+
+        
+    
+    
+            var circle_marker_5c2b4b633ed44a5293a5c9fdb2cea2f3 = L.circleMarker(
+                [37.5315539, 126.8560239],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_4f516d249e7f4a10b007d15d333f21e9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_67c222f16c15489aa95a7bcc99a7f73b = $(`<div id="html_67c222f16c15489aa95a7bcc99a7f73b" style="width: 100.0%; height: 100.0%;">뉴신정주유소</div>`)[0];
+            popup_4f516d249e7f4a10b007d15d333f21e9.setContent(html_67c222f16c15489aa95a7bcc99a7f73b);
+        
+
+        circle_marker_5c2b4b633ed44a5293a5c9fdb2cea2f3.bindPopup(popup_4f516d249e7f4a10b007d15d333f21e9)
+        ;
+
+        
+    
+    
+            var circle_marker_16bdbf66ec8a4a85805166cd48a427ec = L.circleMarker(
+                [37.54065689999999, 126.8415062],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_75b0dd3472ed4f6785a5c8a2ceaf6b1c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b1dd15ef3ba94303b121f8f135b26435 = $(`<div id="html_b1dd15ef3ba94303b121f8f135b26435" style="width: 100.0%; height: 100.0%;">화곡역주유소</div>`)[0];
+            popup_75b0dd3472ed4f6785a5c8a2ceaf6b1c.setContent(html_b1dd15ef3ba94303b121f8f135b26435);
+        
+
+        circle_marker_16bdbf66ec8a4a85805166cd48a427ec.bindPopup(popup_75b0dd3472ed4f6785a5c8a2ceaf6b1c)
+        ;
+
+        
+    
+    
+            var circle_marker_10d000184f774b8a82c8f1eedaa80357 = L.circleMarker(
+                [37.5338107, 126.8292398],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_2da296eba1b9449095ce01e00aaab9d9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3cf904ef217f420686998bdf45402c47 = $(`<div id="html_3cf904ef217f420686998bdf45402c47" style="width: 100.0%; height: 100.0%;">현대주유소</div>`)[0];
+            popup_2da296eba1b9449095ce01e00aaab9d9.setContent(html_3cf904ef217f420686998bdf45402c47);
+        
+
+        circle_marker_10d000184f774b8a82c8f1eedaa80357.bindPopup(popup_2da296eba1b9449095ce01e00aaab9d9)
+        ;
+
+        
+    
+    
+            var circle_marker_e92f7da3e60e41768f71bfdcc91d5c4b = L.circleMarker(
+                [37.5099691, 126.9082307],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_4428089cd0eb407099adf3ad66baf4ab = L.popup({"maxWidth": "100%"});
+
+        
+            var html_558b19b16ed44a1c9b6c4a1b99d45bee = $(`<div id="html_558b19b16ed44a1c9b6c4a1b99d45bee" style="width: 100.0%; height: 100.0%;">(주)강서오일</div>`)[0];
+            popup_4428089cd0eb407099adf3ad66baf4ab.setContent(html_558b19b16ed44a1c9b6c4a1b99d45bee);
+        
+
+        circle_marker_e92f7da3e60e41768f71bfdcc91d5c4b.bindPopup(popup_4428089cd0eb407099adf3ad66baf4ab)
+        ;
+
+        
+    
+    
+            var circle_marker_f57e6fedf2ec4df7a331ecbdcc266206 = L.circleMarker(
+                [37.6421401, 127.0295678],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_cf363a7fe1744fd7a36cffd406559723 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e21f9185152542a8a22928fe590f2b57 = $(`<div id="html_e21f9185152542a8a22928fe590f2b57" style="width: 100.0%; height: 100.0%;">수유동주유소</div>`)[0];
+            popup_cf363a7fe1744fd7a36cffd406559723.setContent(html_e21f9185152542a8a22928fe590f2b57);
+        
+
+        circle_marker_f57e6fedf2ec4df7a331ecbdcc266206.bindPopup(popup_cf363a7fe1744fd7a36cffd406559723)
+        ;
+
+        
+    
+    
+            var circle_marker_0ebecaacf94147e19594d5144ed8a6d4 = L.circleMarker(
+                [37.6496008, 127.0206486],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_702025d7a04e41c7a16414bcb583a6ab = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a14cfb2cbf6a489ba5fe1b55aafcf48a = $(`<div id="html_a14cfb2cbf6a489ba5fe1b55aafcf48a" style="width: 100.0%; height: 100.0%;">삼미북부셀프주유소</div>`)[0];
+            popup_702025d7a04e41c7a16414bcb583a6ab.setContent(html_a14cfb2cbf6a489ba5fe1b55aafcf48a);
+        
+
+        circle_marker_0ebecaacf94147e19594d5144ed8a6d4.bindPopup(popup_702025d7a04e41c7a16414bcb583a6ab)
+        ;
+
+        
+    
+    
+            var circle_marker_c907d294c53f40e5a039888b6504b471 = L.circleMarker(
+                [37.614921, 127.0527521],
+                {"bubblingMouseEvents": true, "color": "#3186cc", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3186cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15, "stroke": true, "weight": 3}
+            ).addTo(map_fb3f960f79114881944ec8086babfb82);
+        
+    
+        var popup_6145ca5d554241a8b332d70e00951203 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0c83733a02554215bdf756718ddfeaaf = $(`<div id="html_0c83733a02554215bdf756718ddfeaaf" style="width: 100.0%; height: 100.0%;">원천주유소</div>`)[0];
+            popup_6145ca5d554241a8b332d70e00951203.setContent(html_0c83733a02554215bdf756718ddfeaaf);
+        
+
+        circle_marker_c907d294c53f40e5a039888b6504b471.bindPopup(popup_6145ca5d554241a8b332d70e00951203)
+        ;
+
+        
+    
+</script>
