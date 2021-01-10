@@ -1,12 +1,29 @@
-<!DOCTYPE html>
 <html>
-<head><meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="icon" href="../../image/wj_icon1_48.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PVBH475QST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-<title>tf101-6_표를_다루는_도구_'판다스'(실습)</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-
-
-
+      gtag('config', 'G-PVBH475QST');
+    </script>
+    <title>WJ repo - Tensorflow(python)</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1><a href = "../../index.html">WJ Repository</a></h1>
+    <ul>
+      <li><a href ="../../services.html">Services</a></li>
+      <li><a href ="../../researches.html">Researches</a></li>
+      <li><a href ="../../source_code.html">Source Code</a></li>
+	    <li><a href ="../../contact.html">Contact</a></li>
+    <br>
+    <h2>Researches</h2>
+    <h4>Tensorflow(python)</h4>
+    <h5>표를_다루는_도구_'판다스'(실습)</h5>
 
 <style type="text/css">
     pre { line-height: 125%; }
@@ -4551,7 +4568,7 @@ form{
   .bp3-running-text table th, table.bp3-html-table th{
     color:#182026;
     font-weight:600; }
-  
+
   .bp3-running-text table td,
   table.bp3-html-table td{
     color:#182026; }
@@ -14238,17 +14255,17 @@ a.anchor-link {
                 },
                 displayAlign: 'center',
                 CommonHTML: {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 },
                 "HTML-CSS": {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 }
             });
-        
+
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
     }
@@ -14279,10 +14296,10 @@ a.anchor-link {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 파일로부터 데이터 읽어오기</span>
 <span class="n">파일경로</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/blackdew/tensorflow1/master/csv/lemonade.csv&#39;</span>
 <span class="n">레모네이드</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">파일경로</span><span class="p">)</span>
- 
+
 <span class="n">파일경로</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/blackdew/tensorflow1/master/csv/boston.csv&#39;</span>
 <span class="n">보스턴</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">파일경로</span><span class="p">)</span>
- 
+
 <span class="n">파일경로</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/blackdew/tensorflow1/master/csv/iris.csv&#39;</span>
 <span class="n">아이리스</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">파일경로</span><span class="p">)</span>
 </pre></div>
@@ -14316,7 +14333,7 @@ a.anchor-link {
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14356,7 +14373,7 @@ a.anchor-link {
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14384,7 +14401,7 @@ Index([&#39;꽃잎길이&#39;, &#39;꽃잎폭&#39;, &#39;꽃받침길이&#39;, &
 <span class="n">독립</span> <span class="o">=</span> <span class="n">레모네이드</span><span class="p">[[</span><span class="s1">&#39;온도&#39;</span><span class="p">]]</span>
 <span class="n">종속</span> <span class="o">=</span> <span class="n">레모네이드</span><span class="p">[[</span><span class="s1">&#39;판매량&#39;</span><span class="p">]]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">독립</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">종속</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
- 
+
 </pre></div>
 
      </div>
@@ -14399,7 +14416,7 @@ Index([&#39;꽃잎길이&#39;, &#39;꽃잎폭&#39;, &#39;꽃받침길이&#39;, &
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14419,7 +14436,7 @@ Index([&#39;꽃잎길이&#39;, &#39;꽃잎폭&#39;, &#39;꽃받침길이&#39;, &
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">독립</span> <span class="o">=</span> <span class="n">보스턴</span><span class="p">[[</span><span class="s1">&#39;crim&#39;</span><span class="p">,</span> <span class="s1">&#39;zn&#39;</span><span class="p">,</span> <span class="s1">&#39;indus&#39;</span><span class="p">,</span> <span class="s1">&#39;chas&#39;</span><span class="p">,</span> <span class="s1">&#39;nox&#39;</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">독립</span> <span class="o">=</span> <span class="n">보스턴</span><span class="p">[[</span><span class="s1">&#39;crim&#39;</span><span class="p">,</span> <span class="s1">&#39;zn&#39;</span><span class="p">,</span> <span class="s1">&#39;indus&#39;</span><span class="p">,</span> <span class="s1">&#39;chas&#39;</span><span class="p">,</span> <span class="s1">&#39;nox&#39;</span><span class="p">,</span>
             <span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;dis&#39;</span><span class="p">,</span> <span class="s1">&#39;rad&#39;</span><span class="p">,</span> <span class="s1">&#39;tax&#39;</span><span class="p">,</span>
             <span class="s1">&#39;ptratio&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;lstat&#39;</span><span class="p">]]</span>
 <span class="n">종속</span> <span class="o">=</span> <span class="n">보스턴</span><span class="p">[[</span><span class="s1">&#39;medv&#39;</span><span class="p">]]</span>
@@ -14438,7 +14455,7 @@ Index([&#39;꽃잎길이&#39;, &#39;꽃잎폭&#39;, &#39;꽃받침길이&#39;, &
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14475,7 +14492,7 @@ Index([&#39;꽃잎길이&#39;, &#39;꽃잎폭&#39;, &#39;꽃받침길이&#39;, &
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14512,7 +14529,7 @@ Index([&#39;꽃잎길이&#39;, &#39;꽃잎폭&#39;, &#39;꽃받침길이&#39;, &
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 

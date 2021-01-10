@@ -1,12 +1,29 @@
-<!DOCTYPE html>
 <html>
-<head><meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="icon" href="../../image/wj_icon1_48.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PVBH475QST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-<title>tf101_19_히든레이어</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-
-
-
+      gtag('config', 'G-PVBH475QST');
+    </script>
+    <title>WJ repo - Tensorflow(python)</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1><a href = "../../index.html">WJ Repository</a></h1>
+    <ul>
+      <li><a href ="../../services.html">Services</a></li>
+      <li><a href ="../../researches.html">Researches</a></li>
+      <li><a href ="../../source_code.html">Source Code</a></li>
+	    <li><a href ="../../contact.html">Contact</a></li>
+    <br>
+    <h2>Researches</h2>
+    <h4>Tensorflow(python)</h4>
+    <h5>히든레이어(실습)_아이리스</h5>
 
 <style type="text/css">
     pre { line-height: 125%; }
@@ -4551,7 +4568,7 @@ form{
   .bp3-running-text table th, table.bp3-html-table th{
     color:#182026;
     font-weight:600; }
-  
+
   .bp3-running-text table td,
   table.bp3-html-table td{
     color:#182026; }
@@ -14238,17 +14255,17 @@ a.anchor-link {
                 },
                 displayAlign: 'center',
                 CommonHTML: {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 },
                 "HTML-CSS": {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 }
             });
-        
+
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
     }
@@ -14284,7 +14301,7 @@ a.anchor-link {
 
 <span class="c1"># 원핫인코딩</span>
 <span class="n">아이리스</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">아이리스</span><span class="p">)</span>
- 
+
 <span class="c1"># 종속변수, 독립변수</span>
 <span class="n">독립</span> <span class="o">=</span> <span class="n">아이리스</span><span class="p">[[</span><span class="s1">&#39;꽃잎길이&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃잎폭&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃받침길이&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃받침폭&#39;</span><span class="p">]]</span>
 <span class="n">종속</span> <span class="o">=</span> <span class="n">아이리스</span><span class="p">[[</span><span class="s1">&#39;품종_setosa&#39;</span><span class="p">,</span> <span class="s1">&#39;품종_versicolor&#39;</span><span class="p">,</span> <span class="s1">&#39;품종_virginica&#39;</span><span class="p">]]</span>
@@ -14303,7 +14320,7 @@ a.anchor-link {
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14332,7 +14349,7 @@ a.anchor-link {
 <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
               <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
- 
+
 <span class="c1"># 모델 구조 확인</span>
 <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
@@ -14349,24 +14366,24 @@ a.anchor-link {
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Model: &#34;model&#34;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+Layer (type)                 Output Shape              Param #
 =================================================================
-input_1 (InputLayer)         [(None, 4)]               0         
+input_1 (InputLayer)         [(None, 4)]               0
 _________________________________________________________________
-dense (Dense)                (None, 8)                 40        
+dense (Dense)                (None, 8)                 40
 _________________________________________________________________
-dense_1 (Dense)              (None, 8)                 72        
+dense_1 (Dense)              (None, 8)                 72
 _________________________________________________________________
-dense_2 (Dense)              (None, 8)                 72        
+dense_2 (Dense)              (None, 8)                 72
 _________________________________________________________________
-dense_3 (Dense)              (None, 3)                 27        
+dense_3 (Dense)              (None, 3)                 27
 =================================================================
 Total params: 211
 Trainable params: 211
@@ -14402,7 +14419,7 @@ _________________________________________________________________
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14613,7 +14630,7 @@ Epoch 100/100
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
@@ -14652,7 +14669,7 @@ Epoch 100/100
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 

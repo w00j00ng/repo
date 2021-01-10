@@ -1,12 +1,29 @@
-<!DOCTYPE html>
 <html>
-<head><meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <link rel="icon" href="../../image/wj_icon1_48.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PVBH475QST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-<title>tf101_20_데이터를_위한_팁(실습)</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-
-
-
+      gtag('config', 'G-PVBH475QST');
+    </script>
+    <title>WJ repo - Tensorflow(python)</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1><a href = "../../index.html">WJ Repository</a></h1>
+    <ul>
+      <li><a href ="../../services.html">Services</a></li>
+      <li><a href ="../../researches.html">Researches</a></li>
+      <li><a href ="../../source_code.html">Source Code</a></li>
+	    <li><a href ="../../contact.html">Contact</a></li>
+    <br>
+    <h2>Researches</h2>
+    <h4>Tensorflow(python)</h4>
+    <h5>데이터를_위한_팁(실습)</h5>
 
 <style type="text/css">
     pre { line-height: 125%; }
@@ -4551,7 +4568,7 @@ form{
   .bp3-running-text table th, table.bp3-html-table th{
     color:#182026;
     font-weight:600; }
-  
+
   .bp3-running-text table td,
   table.bp3-html-table td{
     color:#182026; }
@@ -14238,17 +14255,17 @@ a.anchor-link {
                 },
                 displayAlign: 'center',
                 CommonHTML: {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 },
                 "HTML-CSS": {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 }
             });
-        
+
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
     }
@@ -14295,7 +14312,7 @@ a.anchor-link {
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
 
@@ -14386,7 +14403,7 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 칼럼의 데이터 타입 체크</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">아이리스</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
- 
+
 <span class="c1"># 원핫인코딩 되지 않는 현상 확인</span>
 <span class="n">인코딩</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">아이리스</span><span class="p">)</span>
 <span class="n">인코딩</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -14404,7 +14421,7 @@ a.anchor-link {
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14421,7 +14438,7 @@ dtype: object
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
@@ -14513,7 +14530,7 @@ dtype: object
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 품종 타입을 범주형으로 바꾸어 준다. </span>
 <span class="n">아이리스</span><span class="p">[</span><span class="s1">&#39;품종&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">아이리스</span><span class="p">[</span><span class="s1">&#39;품종&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">아이리스</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
- 
+
 <span class="c1"># 카테고리 타입의 변수만 원핫인코딩</span>
 <span class="n">인코딩</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">아이리스</span><span class="p">)</span>
 <span class="n">인코딩</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -14531,7 +14548,7 @@ dtype: object
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14548,7 +14565,7 @@ dtype: object
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
@@ -14666,7 +14683,7 @@ dtype: object
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
@@ -14774,7 +14791,7 @@ dtype: object
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
@@ -14786,7 +14803,7 @@ dtype: object
 
 <div class="jp-OutputArea-child">
 
-    
+
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
