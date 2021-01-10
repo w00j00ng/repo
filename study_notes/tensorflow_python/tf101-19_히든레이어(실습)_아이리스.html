@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
   <head>
     <link rel="icon" href="../../image/wj_icon1_48.png">
@@ -18,12 +19,13 @@
     <ul>
       <li><a href ="../../services.html">Services</a></li>
       <li><a href ="../../researches.html">Researches</a></li>
+      <li><a href ="../../study_notes.html">Study Notes</a></li>
       <li><a href ="../../source_code.html">Source Code</a></li>
 	    <li><a href ="../../contact.html">Contact</a></li>
     <br>
-    <h2><a href ="../../researches.html">Researches</a></h2>
-    <h4>Tensorflow(python)</h4>
-    <h5>레모네이드_판매_예측(실습)</h5>
+    <h2><a href ="../../study_notes.html">Study Notes</a></h2>
+    <h4>Tensorflow(python) - WJ repo</h4>
+    <h5>히든레이어 아이리스</h5>
 
 <style type="text/css">
     pre { line-height: 125%; }
@@ -14276,12 +14278,12 @@ a.anchor-link {
 <div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 라이브러리 사용</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 </pre></div>
 
      </div>
@@ -14292,101 +14294,19 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 데이터를 준비합니다.</span>
-<span class="n">파일경로</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/blackdew/tensorflow1/master/csv/lemonade.csv&#39;</span>
-<span class="n">레모네이드</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">파일경로</span><span class="p">)</span>
-<span class="n">레모네이드</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1.과거의 데이터를 준비합니다.</span>
+<span class="n">파일경로</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/blackdew/tensorflow1/master/csv/iris.csv&#39;</span>
+<span class="n">아이리스</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">파일경로</span><span class="p">)</span>
 
-     </div>
-</div>
-</div>
-</div>
+<span class="c1"># 원핫인코딩</span>
+<span class="n">아이리스</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">아이리스</span><span class="p">)</span>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>온도</th>
-      <th>판매량</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>20</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>21</td>
-      <td>42</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>22</td>
-      <td>44</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>23</td>
-      <td>46</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>24</td>
-      <td>48</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 종속변수, 독립변수</span>
-<span class="n">독립</span> <span class="o">=</span> <span class="n">레모네이드</span><span class="p">[[</span><span class="s1">&#39;온도&#39;</span><span class="p">]]</span>
-<span class="n">종속</span> <span class="o">=</span> <span class="n">레모네이드</span><span class="p">[[</span><span class="s1">&#39;판매량&#39;</span><span class="p">]]</span>
+<span class="c1"># 종속변수, 독립변수</span>
+<span class="n">독립</span> <span class="o">=</span> <span class="n">아이리스</span><span class="p">[[</span><span class="s1">&#39;꽃잎길이&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃잎폭&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃받침길이&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃받침폭&#39;</span><span class="p">]]</span>
+<span class="n">종속</span> <span class="o">=</span> <span class="n">아이리스</span><span class="p">[[</span><span class="s1">&#39;품종_setosa&#39;</span><span class="p">,</span> <span class="s1">&#39;품종_versicolor&#39;</span><span class="p">,</span> <span class="s1">&#39;품종_virginica&#39;</span><span class="p">]]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">독립</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">종속</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
@@ -14407,7 +14327,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(6, 1) (6, 1)
+<pre>(150, 4) (150, 3)
 </pre>
 </div>
 </div>
@@ -14416,33 +14336,24 @@ a.anchor-link {
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 모델을 만듭니다.</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 모델을 학습시킵니다. </span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">독립</span><span class="p">,</span> <span class="n">종속</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">독립</span><span class="p">,</span> <span class="n">종속</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2. 모델의 구조를 만듭니다</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;swish&quot;</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;swish&quot;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;swish&quot;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+
+<span class="c1"># 모델 구조 확인</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14462,26 +14373,259 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Epoch 1/10
-1/1 [==============================] - 0s 3ms/step - loss: 0.0068
-Epoch 2/10
-1/1 [==============================] - 0s 3ms/step - loss: 0.0068
-Epoch 3/10
-1/1 [==============================] - 0s 4ms/step - loss: 0.0067
-Epoch 4/10
-1/1 [==============================] - 0s 3ms/step - loss: 0.0067
-Epoch 5/10
-1/1 [==============================] - 0s 5ms/step - loss: 0.0067
-Epoch 6/10
-1/1 [==============================] - 0s 5ms/step - loss: 0.0067
-Epoch 7/10
-1/1 [==============================] - 0s 3ms/step - loss: 0.0067
-Epoch 8/10
-1/1 [==============================] - 0s 2ms/step - loss: 0.0067
-Epoch 9/10
-1/1 [==============================] - 0s 4ms/step - loss: 0.0067
-Epoch 10/10
-1/1 [==============================] - 0s 5ms/step - loss: 0.0067
+<pre>Model: &#34;model&#34;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         [(None, 4)]               0
+_________________________________________________________________
+dense (Dense)                (None, 8)                 40
+_________________________________________________________________
+dense_1 (Dense)              (None, 8)                 72
+_________________________________________________________________
+dense_2 (Dense)              (None, 8)                 72
+_________________________________________________________________
+dense_3 (Dense)              (None, 3)                 27
+=================================================================
+Total params: 211
+Trainable params: 211
+Non-trainable params: 0
+_________________________________________________________________
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 3.데이터로 모델을 학습(FIT)합니다.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">독립</span><span class="p">,</span> <span class="n">종속</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Epoch 1/100
+5/5 [==============================] - 1s 3ms/step - loss: 1.1697 - accuracy: 0.1407
+Epoch 2/100
+5/5 [==============================] - 0s 2ms/step - loss: 1.0348 - accuracy: 0.3990
+Epoch 3/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.9995 - accuracy: 0.5804
+Epoch 4/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.9518 - accuracy: 0.6311
+Epoch 5/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.8790 - accuracy: 0.6502
+Epoch 6/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.8371 - accuracy: 0.6376
+Epoch 7/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.7761 - accuracy: 0.6970
+Epoch 8/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.7748 - accuracy: 0.6480
+Epoch 9/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.7269 - accuracy: 0.6619
+Epoch 10/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.7183 - accuracy: 0.6589
+Epoch 11/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.6739 - accuracy: 0.7027
+Epoch 12/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.6666 - accuracy: 0.6619
+Epoch 13/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.6239 - accuracy: 0.6962
+Epoch 14/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.6260 - accuracy: 0.6680
+Epoch 15/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.5881 - accuracy: 0.7040
+Epoch 16/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.5728 - accuracy: 0.6876
+Epoch 17/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.5644 - accuracy: 0.6837
+Epoch 18/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.5438 - accuracy: 0.7086
+Epoch 19/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.5617 - accuracy: 0.6366
+Epoch 20/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.5297 - accuracy: 0.6699
+Epoch 21/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.5199 - accuracy: 0.6695
+Epoch 22/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.4882 - accuracy: 0.7013
+Epoch 23/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.4850 - accuracy: 0.8016
+Epoch 24/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.4669 - accuracy: 0.7277
+Epoch 25/100
+5/5 [==============================] - 0s 4ms/step - loss: 0.4325 - accuracy: 0.8442
+Epoch 26/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.4513 - accuracy: 0.8379
+Epoch 27/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.4375 - accuracy: 0.8041
+Epoch 28/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.4171 - accuracy: 0.8994
+Epoch 29/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.3670 - accuracy: 0.8675
+Epoch 30/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.3974 - accuracy: 0.9544
+Epoch 31/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3732 - accuracy: 0.8984
+Epoch 32/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3912 - accuracy: 0.9592
+Epoch 33/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3514 - accuracy: 0.9224
+Epoch 34/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3377 - accuracy: 0.9304
+Epoch 35/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3628 - accuracy: 0.9503
+Epoch 36/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3320 - accuracy: 0.9366
+Epoch 37/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3399 - accuracy: 0.9641
+Epoch 38/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3221 - accuracy: 0.9559
+Epoch 39/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3155 - accuracy: 0.9706
+Epoch 40/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.2973 - accuracy: 0.9746
+Epoch 41/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3028 - accuracy: 0.9677
+Epoch 42/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2714 - accuracy: 0.9671
+Epoch 43/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.3052 - accuracy: 0.9598
+Epoch 44/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.2859 - accuracy: 0.9659
+Epoch 45/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2656 - accuracy: 0.9755
+Epoch 46/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.2643 - accuracy: 0.9764
+Epoch 47/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2628 - accuracy: 0.9660
+Epoch 48/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.2562 - accuracy: 0.9655
+Epoch 49/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2442 - accuracy: 0.9611
+Epoch 50/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2323 - accuracy: 0.9820
+Epoch 51/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2235 - accuracy: 0.9764
+Epoch 52/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2126 - accuracy: 0.9703
+Epoch 53/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2039 - accuracy: 0.9633
+Epoch 54/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.2060 - accuracy: 0.9660
+Epoch 55/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.2050 - accuracy: 0.9746
+Epoch 56/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1952 - accuracy: 0.9790
+Epoch 57/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1832 - accuracy: 0.9690
+Epoch 58/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1692 - accuracy: 0.9819
+Epoch 59/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1678 - accuracy: 0.9755
+Epoch 60/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1696 - accuracy: 0.9829
+Epoch 61/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1647 - accuracy: 0.9550
+Epoch 62/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1530 - accuracy: 0.9894
+Epoch 63/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1551 - accuracy: 0.9768
+Epoch 64/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1522 - accuracy: 0.9703
+Epoch 65/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1614 - accuracy: 0.9659
+Epoch 66/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1426 - accuracy: 0.9847
+Epoch 67/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1421 - accuracy: 0.9890
+Epoch 68/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1586 - accuracy: 0.9685
+Epoch 69/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1265 - accuracy: 0.9798
+Epoch 70/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1347 - accuracy: 0.9842
+Epoch 71/100
+5/5 [==============================] - 0s 4ms/step - loss: 0.1219 - accuracy: 0.9759
+Epoch 72/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1350 - accuracy: 0.9712
+Epoch 73/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1497 - accuracy: 0.9703
+Epoch 74/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1338 - accuracy: 0.9781
+Epoch 75/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1191 - accuracy: 0.9812
+Epoch 76/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1307 - accuracy: 0.9615
+Epoch 77/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1040 - accuracy: 0.9811
+Epoch 78/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1094 - accuracy: 0.9755
+Epoch 79/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1175 - accuracy: 0.9716
+Epoch 80/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1073 - accuracy: 0.9781
+Epoch 81/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1287 - accuracy: 0.9659
+Epoch 82/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1338 - accuracy: 0.9602
+Epoch 83/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1047 - accuracy: 0.9847
+Epoch 84/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1017 - accuracy: 0.9873
+Epoch 85/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1147 - accuracy: 0.9625
+Epoch 86/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.0892 - accuracy: 0.9850
+Epoch 87/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.0959 - accuracy: 0.9860
+Epoch 88/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1084 - accuracy: 0.9703
+Epoch 89/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1204 - accuracy: 0.9686
+Epoch 90/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1167 - accuracy: 0.9738
+Epoch 91/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.1203 - accuracy: 0.9712
+Epoch 92/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1124 - accuracy: 0.9729
+Epoch 93/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.0988 - accuracy: 0.9580
+Epoch 94/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.0884 - accuracy: 0.9834
+Epoch 95/100
+5/5 [==============================] - 0s 4ms/step - loss: 0.0895 - accuracy: 0.9877
+Epoch 96/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.0807 - accuracy: 0.9907
+Epoch 97/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.0827 - accuracy: 0.9907
+Epoch 98/100
+5/5 [==============================] - 0s 2ms/step - loss: 0.0845 - accuracy: 0.9816
+Epoch 99/100
+5/5 [==============================] - 0s 3ms/step - loss: 0.1037 - accuracy: 0.9681
+Epoch 100/100
+5/5 [==============================] - 0s 4ms/step - loss: 0.0725 - accuracy: 0.9741
 </pre>
 </div>
 </div>
@@ -14489,13 +14633,13 @@ Epoch 10/10
 <div class="jp-OutputArea-child">
 
 
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;tensorflow.python.keras.callbacks.History at 0x7faa7aa19550&gt;</pre>
+<pre>&lt;tensorflow.python.keras.callbacks.History at 0x7ff4775432b0&gt;</pre>
 </div>
 
 </div>
@@ -14507,11 +14651,12 @@ Epoch 10/10
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 모델을 이용합니다. </span>
-<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">독립</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 4. 모델을 이용합니다</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">독립</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">종속</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 
      </div>
@@ -14531,47 +14676,17 @@ Epoch 10/10
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[[40.13465 ]
- [42.087822]
- [44.040997]
- [45.994167]
- [47.94734 ]
- [49.900513]]
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mi">15</span><span class="p">]]))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[[30.368788]]
+<pre>[[9.9604440e-01 3.9467136e-03 8.8631541e-06]
+ [9.9427998e-01 5.7010832e-03 1.8997313e-05]
+ [9.9428272e-01 5.6981803e-03 1.9091261e-05]
+ [9.9232167e-01 7.6530357e-03 2.5335698e-05]
+ [9.9585032e-01 4.1404939e-03 9.1284574e-06]]
+   품종_setosa  품종_versicolor  품종_virginica
+0          1              0             0
+1          1              0             0
+2          1              0             0
+3          1              0             0
+4          1              0             0
 </pre>
 </div>
 </div>

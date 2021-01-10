@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
   <head>
     <link rel="icon" href="../../image/wj_icon1_48.png">
@@ -18,12 +19,13 @@
     <ul>
       <li><a href ="../../services.html">Services</a></li>
       <li><a href ="../../researches.html">Researches</a></li>
+      <li><a href ="../../study_notes.html">Study Notes</a></li>
       <li><a href ="../../source_code.html">Source Code</a></li>
 	    <li><a href ="../../contact.html">Contact</a></li>
     <br>
-    <h2><a href ="../../researches.html">Researches</a></h2>
-    <h4>Tensorflow(python)</h4>
-    <h5>모델을_위한_팁(실습)</h5>
+    <h2><a href ="../../study_notes.html">Study Notes</a></h2>
+    <h4>Tensorflow(python) - WJ repo</h4>
+    <h5>히든레이어 보스턴 집값 예측</h5>
 
 <style type="text/css">
     pre { line-height: 125%; }
@@ -14273,13 +14275,7 @@ a.anchor-link {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>보스턴 집값 예측</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
@@ -14295,7 +14291,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
@@ -14304,8 +14300,20 @@ a.anchor-link {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1.과거의 데이터를 준비합니다.</span>
 <span class="n">파일경로</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/blackdew/tensorflow1/master/csv/boston.csv&#39;</span>
 <span class="n">보스턴</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">파일경로</span><span class="p">)</span>
+</pre></div>
 
-<span class="c1"># 종속변수, 독립변수</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 종속변수, 독립변수</span>
 <span class="n">독립</span> <span class="o">=</span> <span class="n">보스턴</span><span class="p">[[</span><span class="s1">&#39;crim&#39;</span><span class="p">,</span> <span class="s1">&#39;zn&#39;</span><span class="p">,</span> <span class="s1">&#39;indus&#39;</span><span class="p">,</span> <span class="s1">&#39;chas&#39;</span><span class="p">,</span> <span class="s1">&#39;nox&#39;</span><span class="p">,</span>
             <span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;dis&#39;</span><span class="p">,</span> <span class="s1">&#39;rad&#39;</span><span class="p">,</span> <span class="s1">&#39;tax&#39;</span><span class="p">,</span>
             <span class="s1">&#39;ptratio&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;lstat&#39;</span><span class="p">]]</span>
@@ -14342,45 +14350,12 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2. 모델의 구조를 만듭니다</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2. 모델의 구조를 BatchNormalization layer를 사용하여 만든다.</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
-
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-
+<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">Y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">)</span>
@@ -14397,9 +14372,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 3.데이터로 모델을 학습(FIT)합니다.</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">독립</span><span class="p">,</span> <span class="n">종속</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">독립</span><span class="p">,</span> <span class="n">종속</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 모델 구조 확인</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14419,199 +14393,34 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Epoch 1/10
-16/16 [==============================] - 0s 2ms/step - loss: 10.0574
-Epoch 2/10
-16/16 [==============================] - 0s 2ms/step - loss: 10.8494
-Epoch 3/10
-16/16 [==============================] - 0s 2ms/step - loss: 10.4146
-Epoch 4/10
-16/16 [==============================] - 0s 1ms/step - loss: 11.1387
-Epoch 5/10
-16/16 [==============================] - 0s 2ms/step - loss: 11.3219
-Epoch 6/10
-16/16 [==============================] - 0s 2ms/step - loss: 8.9937
-Epoch 7/10
-16/16 [==============================] - 0s 2ms/step - loss: 9.8142
-Epoch 8/10
-16/16 [==============================] - 0s 2ms/step - loss: 8.2687
-Epoch 9/10
-16/16 [==============================] - 0s 2ms/step - loss: 10.3550
-Epoch 10/10
-16/16 [==============================] - 0s 2ms/step - loss: 11.8494
+<pre>Model: &#34;model&#34;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         [(None, 13)]              0
+_________________________________________________________________
+dense (Dense)                (None, 10)                140
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 11
+=================================================================
+Total params: 151
+Trainable params: 151
+Non-trainable params: 0
+_________________________________________________________________
 </pre>
 </div>
 </div>
 
-<div class="jp-OutputArea-child">
-
-
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;tensorflow.python.keras.callbacks.History at 0x7ff075be8240&gt;</pre>
 </div>
 
 </div>
 
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>아이리스 품종 분류</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 라이브러리 사용</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 1.과거의 데이터를 준비합니다.</span>
-<span class="n">파일경로</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/blackdew/tensorflow1/master/csv/iris.csv&#39;</span>
-<span class="n">아이리스</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">파일경로</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 원핫인코딩</span>
-<span class="n">아이리스</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">아이리스</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 종속변수, 독립변수</span>
-<span class="n">독립</span> <span class="o">=</span> <span class="n">아이리스</span><span class="p">[[</span><span class="s1">&#39;꽃잎길이&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃잎폭&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃받침길이&#39;</span><span class="p">,</span> <span class="s1">&#39;꽃받침폭&#39;</span><span class="p">]]</span>
-<span class="n">종속</span> <span class="o">=</span> <span class="n">아이리스</span><span class="p">[[</span><span class="s1">&#39;품종_setosa&#39;</span><span class="p">,</span> <span class="s1">&#39;품종_versicolor&#39;</span><span class="p">,</span> <span class="s1">&#39;품종_virginica&#39;</span><span class="p">]]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">독립</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">종속</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(150, 4) (150, 3)
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2. 모델의 구조를 만듭니다</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
-              <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 2. 모델의 구조를 BatchNormalization layer를 사용하여 만든다.</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
-
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">)(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">8</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Activation</span><span class="p">(</span><span class="s1">&#39;swish&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-
-<span class="n">Y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">H</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span>
-              <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 3.데이터로 모델을 학습(FIT)합니다.</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">독립</span><span class="p">,</span> <span class="n">종속</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">독립</span><span class="p">,</span> <span class="n">종속</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -14635,25 +14444,25 @@ Epoch 10/10
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Epoch 1/10
-5/5 [==============================] - 0s 3ms/step - loss: 0.0372 - accuracy: 0.9867
+16/16 [==============================] - 0s 1ms/step - loss: 24.8082
 Epoch 2/10
-5/5 [==============================] - 0s 3ms/step - loss: 0.0325 - accuracy: 0.9867
+16/16 [==============================] - 0s 1ms/step - loss: 24.6912
 Epoch 3/10
-5/5 [==============================] - 0s 3ms/step - loss: 0.0395 - accuracy: 0.9800
+16/16 [==============================] - 0s 1ms/step - loss: 24.0725
 Epoch 4/10
-5/5 [==============================] - 0s 5ms/step - loss: 0.0312 - accuracy: 0.9867
+16/16 [==============================] - 0s 1ms/step - loss: 24.9745
 Epoch 5/10
-5/5 [==============================] - 0s 3ms/step - loss: 0.0396 - accuracy: 0.9933
+16/16 [==============================] - 0s 1ms/step - loss: 23.0283
 Epoch 6/10
-5/5 [==============================] - 0s 3ms/step - loss: 0.0141 - accuracy: 1.0000
+16/16 [==============================] - 0s 1ms/step - loss: 22.5156
 Epoch 7/10
-5/5 [==============================] - 0s 3ms/step - loss: 0.0849 - accuracy: 0.9800
+16/16 [==============================] - 0s 1ms/step - loss: 24.0627
 Epoch 8/10
-5/5 [==============================] - 0s 3ms/step - loss: 0.0545 - accuracy: 0.9800
+16/16 [==============================] - 0s 1ms/step - loss: 23.0525
 Epoch 9/10
-5/5 [==============================] - 0s 3ms/step - loss: 0.0409 - accuracy: 0.9800
+16/16 [==============================] - 0s 1ms/step - loss: 23.9734
 Epoch 10/10
-5/5 [==============================] - 0s 2ms/step - loss: 0.0259 - accuracy: 0.9800
+16/16 [==============================] - 0s 1ms/step - loss: 23.6213
 </pre>
 </div>
 </div>
@@ -14661,15 +14470,160 @@ Epoch 10/10
 <div class="jp-OutputArea-child">
 
 
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;tensorflow.python.keras.callbacks.History at 0x7ff0750c61d0&gt;</pre>
+<pre>&lt;tensorflow.python.keras.callbacks.History at 0x7f8501962588&gt;</pre>
 </div>
 
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 4. 모델을 이용합니다</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">독립</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">종속</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[[32.73603 ]
+ [27.14563 ]
+ [32.80082 ]
+ [31.581993]
+ [31.1026  ]]
+   medv
+0  24.0
+1  21.6
+2  34.7
+3  33.4
+4  36.2
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 모델의 수식 확인</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_weights</span><span class="p">())</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[array([[-1.38502747e-01,  5.87390326e-02,  1.14020526e-01,
+         3.40138555e-01,  2.00372100e-01,  3.62265855e-01,
+         2.99374580e-01, -1.87167414e-02, -2.18583830e-02,
+        -2.90337741e-01],
+       [ 1.51369750e-01,  1.11258067e-01, -2.32779339e-01,
+        -2.53717780e-01,  4.64133918e-01, -1.63675323e-01,
+        -1.85835347e-01,  2.81340420e-01,  3.42453837e-01,
+         3.20259929e-01],
+       [ 4.11529601e-01, -2.02730075e-01,  4.32841897e-01,
+         2.85292029e-01, -3.29378784e-01, -3.31371039e-01,
+         2.22940266e-01,  3.81100893e-01, -1.81190848e-01,
+        -8.90060961e-02],
+       [ 1.71636641e+00,  1.00648606e+00, -1.27247667e+00,
+        -2.27663163e-02,  4.30906832e-01, -1.68160498e+00,
+        -2.46288881e-01, -1.85548937e+00,  1.70608914e+00,
+         1.19213007e-01],
+       [-4.39461321e-01, -3.60245228e-01,  6.30908072e-01,
+         1.09438803e-02, -2.60910809e-01, -2.65899420e-01,
+         1.34293154e-01,  4.54392314e-01,  1.65000275e-01,
+         5.24646640e-01],
+       [ 9.85447347e-01,  1.33667719e+00,  1.36129141e+00,
+        -1.87964231e-01,  3.07323933e-01, -1.45422673e+00,
+        -1.47282410e+00, -1.47266304e+00,  8.73471737e-01,
+         9.48014259e-01],
+       [ 3.18922162e-01, -7.04373568e-02, -4.70726699e-01,
+         2.30748653e-01, -3.26960027e-01,  1.85336977e-01,
+        -7.07336441e-02, -2.93368489e-01, -1.28497630e-01,
+         1.71061471e-01],
+       [ 1.76943153e-01, -7.57543743e-01, -7.35978127e-01,
+         3.50600898e-01,  4.48870659e-02,  6.38943970e-01,
+         1.03000782e-01, -1.46932706e-01, -5.53994358e-01,
+         4.21721399e-01],
+       [ 3.01983595e-01, -1.86000064e-01,  5.53616762e-01,
+        -1.32016405e-01,  6.72084689e-02, -7.08654940e-01,
+         3.35226268e-01, -6.70436472e-02, -9.99228507e-02,
+        -6.60322607e-01],
+       [ 6.71017990e-02,  1.75082777e-02, -1.38006955e-01,
+        -1.15793109e-01, -7.90282786e-02,  3.22569013e-01,
+        -9.88479853e-02,  1.55256003e-01,  3.85634959e-01,
+         1.48836955e-01],
+       [ 2.15078399e-01, -1.30392522e-01, -6.29446745e-01,
+        -3.73772174e-01,  1.00527704e-01, -3.69726747e-01,
+         6.08560205e-01, -5.92730753e-02, -3.05671453e-01,
+         6.06687665e-02],
+       [-8.26296359e-02,  2.65971869e-01,  2.87034512e-01,
+        -1.08623840e-01, -3.80863786e-01,  1.24724306e-01,
+         1.44884557e-01,  4.22577262e-01,  3.78890127e-01,
+        -2.76022106e-01],
+       [-6.18237078e-01, -3.61253619e-01,  4.52423215e-01,
+         3.31739068e-01, -2.74771780e-01,  3.22809577e-01,
+         1.83878660e-01, -2.85805576e-03, -3.43274653e-01,
+         1.78216631e-03]], dtype=float32), array([ 4.4964704e-01,  4.4224828e-01,  3.4776327e-01, -2.3233188e-02,
+        8.9945698e-30, -5.5386877e-01, -4.0328318e-01, -4.6633899e-01,
+        4.1950887e-01, -2.3326911e-01], dtype=float32), array([[ 0.5116164 ],
+       [ 0.6901318 ],
+       [ 0.62978137],
+       [-0.2990063 ],
+       [-0.00993359],
+       [-0.05862803],
+       [-0.63743955],
+       [-0.5332043 ],
+       [ 0.1735227 ],
+       [-0.18380508]], dtype=float32), array([0.45472515], dtype=float32)]
+</pre>
+</div>
 </div>
 
 </div>
