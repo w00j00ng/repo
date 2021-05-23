@@ -539,6 +539,8 @@ data_dict = {}
 
 #### (2) 플로우차트
 
+![studycameet](.\studycameet.png)
+
 
 
 ## 6. 딥러닝 모델링
