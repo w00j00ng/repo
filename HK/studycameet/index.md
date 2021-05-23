@@ -513,14 +513,11 @@ data = db.engine.execute(f"SELECT   lecture_id "
                          f"       , lecture_part "
                          f"       , rate_posture "
                          f"       , rate_concentrate "
-                         f"       , create_date "
-                         f"       , create_time "
+                         f"       , COUNT(*) "
                          f"FROM     study_log "
                          f"WHERE    student_id = {session.get('user_id')} "
                          f"GROUP BY lecture_id "
                          f"       , lecture_part "
-                         f"       , create_date "
-                         f"       , create_time "
                          f"ORDER BY id ")
 ```
 
@@ -528,23 +525,22 @@ data = db.engine.execute(f"SELECT   lecture_id "
 
 ```python
 data_dict = {}
-    rownum, posture_sum, concentrate_sum = 0, 0, 0
-    for row in data:
-        if row[0] not in data_dict:
-            data_dict[row[0]] = {}
-        data_dict[row[0]][row[1]] = {
-            'rate_posture': row[2], 
-            'rate_concentrate': row[3],          
-            'date': row[4],          
-            'hour': row[5]
-        }
-        posture_sum += row[2]
-        concentrate_sum += row[3]
-        rownum += 1
-    if rownum == 0:
-        return render_template('student/empty.html')
-    avginfo = [posture_sum / rownum, concentrate_sum / rownum]
-    return render_template('student/total.html', data=data_dict, avginfo=avginfo, rownum=rownum)
+rownum, posture_sum, concentrate_sum = 0, 0, 0
+for row in data:
+    if row[0] not in data_dict:
+        data_dict[row[0]] = {}
+    data_dict[row[0]][row[1]] = {
+        'rate_posture': row[2], 
+        'rate_concentrate': row[3], 
+        'count': row[4]
+    }
+    posture_sum += row[2]
+    concentrate_sum += row[3]
+    rownum += 1
+if rownum == 0:
+    return render_template('student/empty.html')
+avginfo = [posture_sum / rownum, concentrate_sum / rownum]
+return render_template('student/total.html', data=data_dict, avginfo=avginfo, rownum=rownum)
 ```
 
 - 출력결과
