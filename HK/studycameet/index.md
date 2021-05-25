@@ -669,7 +669,7 @@ def by_time():
 
 #### (2) 플로우차트
 
-![studycameet](.\studycameet.png)
+![studycameet](.\chatbot_flowchart.png)
 
 
 
