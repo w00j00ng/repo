@@ -9,8 +9,13 @@
 
 - 박예영 twoone67@naver.com
 - 용우중 magoswj@gmail.com
-
 - 윤선미 yunseonmi97@naver.com
+
+#### 소스코드
+
+- https://github.com/w00j00ng/studycameet
+
+
 
 ## 1. 메뉴
 
@@ -49,13 +54,13 @@
 
 ## 2. 공부하기
 
+![studycamlogic](.\studycamlogic.png)
+
 #### (1) 이용방법
 
 - 프로그램은 while 루프를 돌 때마다 화면을 캡쳐하면서 동작합니다
 
 ```python
-import cv2
-
 while True:
     ret, frame = capture.read()
     #--------생략--------#
@@ -117,11 +122,11 @@ while True:
     #--------생략--------#
     key = cv2.waitKey(33)
     if key == ord("v"):
-        cv2.putText(frame, f"5 <<", (550, 410),
+        cv2.putText(frame, "5 <<", (550, 410),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
         last_report_time -= 5
     if key == ord("b"):
-        cv2.putText(frame, f">> 5", (550, 410),
+        cv2.putText(frame, ">> 5", (550, 410),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
         last_report_time += 5
 ```
@@ -258,10 +263,10 @@ def get_emotion(faces, gray, model):
             emotion_index = result.index(max(result))
             return label_dict[emotion_index]
     except IndexError:
-        return "No Face"
+        return "No_Face"
     except cv2.error:
-        return "No Face"
-    return "No Emotion"
+        return "No_Face"
+    return "No_Emotion"
 ```
 
 - 감정분석 결과를 데이터에 반영합니다
@@ -275,8 +280,8 @@ emotion_data = {
         'Neutral': 0,
         'Sad': 0,
         'Surprise': 0,
-        'No Emotion': 0,
-        'No Face': 0,
+        'No_Emotion': 0,
+        'No_Face': 0,
         'Total': 0
     }
 #--------생략--------#
@@ -300,8 +305,8 @@ while True:
         'Neutral': 25, 
         'Sad': 0, 
         'Surprise': 0, 
-        'No Emotion': 1, 
-        'No Face': 0, 
+        'No_Emotion': 1, 
+        'No_Face': 0, 
         'Total': 66
     }, 
     'eye_data': {
@@ -334,9 +339,9 @@ def upload(report):
     rate_posture, rate_concentrate = 0, 0
     rate_angry, rate_disgust, rate_fear, rate_happy, rate_sad = 0, 0, 0, 0, 0 
     #--------생략--------#
-    if report['loop_count'] != report['emotion_data']['No Face']:
+    if report['loop_count'] != report['emotion_data']['No_Face']:
         rate_posture = (report['eye_data'][0] + report['eye_data'][1]) / \
-                       (report['loop_count'] - report['emotion_data']['No Face'])
+                       (report['loop_count'] - report['emotion_data']['No_Face'])
         rate_concentrate = 1 - report['eye_data'][0] / report['loop_count']
     if report['emotion_data']['Total'] != 0:
         rate_angry = report['emotion_data']['Angry'] / report['emotion_data']['Total']
@@ -446,56 +451,72 @@ class StudyLog(db.Model):
 
 ## 4. 마이 데이터 조회
 
+- 집중도와 자세를 구간화하여 등급을 나누고 결과를 출력합니다
+
+```python
+def get_grade(rate):
+    if rate > 0.9:
+        grade = "아주좋음"
+    elif rate > 0.6:
+        grade = "좋음"
+    elif rate > 0.3:
+        grade = "보통"
+    elif rate > 0.1:
+        grade = "나쁨"
+    else:
+        grade = "아주나쁨"
+    return grade
+```
+
 #### (1) 강사
 
 - SQL문
   - 강사는 평균으로 집계된 정보를 조회할 수 있고 학생 개별의 정보는 확인할 수 없습니다
   - 강의의 토막별 정보를 조회할 수 있습니다
-  - 감정 정보는 제공하지 않습니다
 
 ```python
-data = db.engine.execute(f"SELECT   lecture_id "
-                         f"       , lecture_part "
-                         f"       , AVG(rate_posture) "
-                         f"       , AVG(rate_concentrate) "
-                         f"       , AVG(rate_angry) "
-                         f"       , AVG(rate_disgust) "
-                         f"       , AVG(rate_fear) "
-                         f"       , AVG(rate_happy) "
-                         f"       , AVG(rate_sad) "
-                         f"       , COUNT(*) "
-                         f"FROM     study_log "
-                         f"WHERE    teacher_id = {session.get('user_id')} "
-                         f"GROUP BY lecture_id "
-                         f"       , lecture_part "
-                         f"ORDER BY id ")
-```
-
-- html 파일로 데이터 전송
-
-```python
-data_dict = {}
-rownum = 0
-for row in data:
-	if row[0] not in data_dict:
-		data_dict[row[0]] = {}
-    emotion_list = [row[4], row[5], row[6], row[7], row[8]]
-    emotion_label = ['스트레스', '우울', '불안', '행복', '슬픔']
-    emotion_rank = heapq.nlargest(2, range(len(emotion_list)), 
-                                  key=emotion_list.__getitem__)
-    data_dict[row[0]][row[1]] = {
-        'rate_posture': row[2],
-        'rate_concentrate': row[3],
-        'max_emotion': emotion_label[emotion_rank[0]],
-        'max_emotion_rate': emotion_list[emotion_rank[0]],
-        'second_emotion': emotion_label[emotion_rank[1]],
-        'second_emotion_rate': emotion_list[emotion_rank[1]],
-        'count': row[9]
-    }
-	rownum += 1
-if rownum == 0:
-	return render_template('teacher/empty.html')
-return render_template('teacher/total.html', data=data_dict)
+@bp.route('/by_lecture/')
+def by_lecture():
+    data = db.engine.execute(
+        f"SELECT   lecture_id "
+        f"       , lecture_part "
+        f"       , AVG(rate_posture) "
+        f"       , AVG(rate_concentrate) "
+        f"       , AVG(rate_angry) "
+        f"       , AVG(rate_disgust) "
+        f"       , AVG(rate_fear) "
+        f"       , AVG(rate_happy) "
+        f"       , AVG(rate_sad) "
+        f"       , COUNT(*) "
+        f"FROM     study_log "
+        f"WHERE    teacher_id = {session.get('user_id')} "
+        f"GROUP BY lecture_id "
+        f"       , lecture_part "
+        f"ORDER BY id "
+    )
+    report = {}
+    row_num = 0
+    for row in data:
+        if row[0] not in report:
+            report[row[0]] = {}
+        emotion_list = [row[4], row[5], row[6], row[7], row[8]]
+        emotion_label = ['스트레스', '우울', '불안', '행복', '슬픔']
+        emotion_rank = heapq.nlargest(2, range(len(emotion_list)), key=emotion_list.__getitem__)
+        report[row[0]][row[1]] = {
+            'rate_posture': row[2],
+            'grade_posture': get_grade(row[2]),
+            'rate_concentrate': row[3],
+            'grade_concentrate': get_grade(row[3]),
+            'max_emotion': emotion_label[emotion_rank[0]],
+            'max_emotion_rate': emotion_list[emotion_rank[0]],
+            'second_emotion': emotion_label[emotion_rank[1]],
+            'second_emotion_rate': emotion_list[emotion_rank[1]],
+            'count': row[9]
+        }
+        row_num += 1
+    if row_num == 0:
+        return render_template('teacher/empty.html')
+    return render_template('teacher/by_lecture.html', report=report)
 ```
 
 - 출력결과
@@ -506,46 +527,139 @@ return render_template('teacher/total.html', data=data_dict)
 
 - SQL 문
   - 학생은 개별 정보를 조회할 수 있습니다
+  - 강의/토막별, 날짜별, 요일별, 시간별 통계정보를 제공합니다
   - 감정 정보는 제공하지 않습니다
+- 강의 / 토막별 정보
+
+![student_report](.\student_bylecture.png)
 
 ```python
-data = db.engine.execute(f"SELECT   lecture_id "
-                         f"       , lecture_part "
-                         f"       , rate_posture "
-                         f"       , rate_concentrate "
-                         f"       , COUNT(*) "
-                         f"FROM     study_log "
-                         f"WHERE    student_id = {session.get('user_id')} "
-                         f"GROUP BY lecture_id "
-                         f"       , lecture_part "
-                         f"ORDER BY id ")
+@bp.route('/by_lecture/')
+def by_lecture():
+    data = db.engine.execute(
+        f"SELECT   lecture_id "
+        f"       , lecture_part "
+        f"       , AVG(rate_concentrate) "
+        f"       , AVG(rate_posture) "
+        f"       , COUNT(*) "
+        f"FROM     study_log "
+        f"WHERE    student_id = {session.get('user_id')} "
+        f"GROUP BY lecture_id "
+        f"       , lecture_part "
+        f"ORDER BY id "
+    )
+    report = {}
+    row_num, posture_sum, concentrate_sum = 0, 0, 0
+    for row in data:
+        if row[0] not in report:
+            report[row[0]] = {}
+        report[row[0]][row[1]] = {
+            'rate_concentrate': row[2],
+            'grade_concentrate': get_grade(row[2]),
+            'rate_posture': row[3],
+            'grade_posture': get_grade(row[3]),
+            'count': row[4]
+        }
+        posture_sum += row[2]
+        concentrate_sum += row[3]
+        row_num += 1
+    if row_num == 0:
+        return render_template('student/empty.html')
+    avg_info = [
+        get_grade(posture_sum / row_num),
+        posture_sum / row_num,
+        get_grade(concentrate_sum / row_num),
+        concentrate_sum / row_num
+    ]
+    return render_template('student/by_lecture.html', report=report, avg_info=avg_info)
 ```
 
-- html 파일로 데이터 전송
+- 날짜별 정보
+
+![student_bydate](.\student_bydate.png)
 
 ```python
-data_dict = {}
-rownum, posture_sum, concentrate_sum = 0, 0, 0
-for row in data:
-    if row[0] not in data_dict:
-        data_dict[row[0]] = {}
-    data_dict[row[0]][row[1]] = {
-        'rate_posture': row[2], 
-        'rate_concentrate': row[3], 
-        'count': row[4]
-    }
-    posture_sum += row[2]
-    concentrate_sum += row[3]
-    rownum += 1
-if rownum == 0:
-    return render_template('student/empty.html')
-avginfo = [posture_sum / rownum, concentrate_sum / rownum]
-return render_template('student/total.html', data=data_dict, avginfo=avginfo, rownum=rownum)
+@bp.route('/by_date/')
+def by_date():
+    data = db.engine.execute(
+        f"SELECT   AVG(rate_concentrate) "
+        f"       , AVG(rate_posture) "
+        f"       , create_date "
+        f"FROM     study_log "
+        f"WHERE    student_id = {session.get('user_id')} "
+        f"GROUP BY create_date "
+        f"ORDER BY create_date "
+    )
+    result = []
+    for row in data:
+        result.append({
+            'grade_concentrate': get_grade(row[0]),
+            'rate_concentrate': row[0],
+            'grade_posture': get_grade(row[1]),
+            'rate_posture': row[1],
+            'create_date': row[2]
+        })
+    return render_template('student/by_date.html', result=result)
 ```
 
-- 출력결과
+- 요일별 정보
 
-![student_report](.\student_report.png)
+![student_byweekday](.\student_byweekday.png)
+
+```python
+@bp.route('/by_week/')
+def by_week():
+    data = db.engine.execute(
+        f"SELECT   AVG(rate_concentrate) "
+        f"       , AVG(rate_posture) "
+        f"       , strftime('%w', create_date) "
+        f"FROM     study_log "
+        f"WHERE    student_id = {session.get('user_id')} "
+        f"GROUP BY strftime('%w', create_date) "
+        f"ORDER BY strftime('%w', create_date) "
+    )
+    week_name = {"0": "일요일", "1": "월요일", "2": "화요일", "3": "수요일", "4": "목요일", "5": "금요일", "6": "토요일"}
+    report = []
+    for row in data:
+        report.append({
+            'grade_concentrate': get_grade(row[0]),
+            'rate_concentrate': row[0],
+            'grade_posture': get_grade(row[1]),
+            'rate_posture': row[1],
+            'weekday': week_name[row[2]]
+        })
+    return render_template('student/by_week.html', report=report)
+```
+
+![student_byweekday](.\student_byweekday.png)
+
+- 시간별 정보
+
+![student_bytime](.\student_bytime.png)
+
+```python
+@bp.route('/by_time/')
+def by_time():
+    data = db.engine.execute(
+        f"SELECT   AVG(rate_concentrate) "
+        f"       , AVG(rate_posture) "
+        f"       , create_time "
+        f"FROM     study_log "
+        f"WHERE    student_id = {session.get('user_id')} "
+        f"GROUP BY create_time "
+        f"ORDER BY create_time "
+    )
+    report = []
+    for row in data:
+        report.append({
+            'grade_concentrate': get_grade(row[0]),
+            'rate_concentrate': row[0],
+            'grade_posture': get_grade(row[1]),
+            'rate_posture': row[1],
+            'create_time': row[2]
+        })
+    return render_template('student/by_time.html', report=report)
+```
 
 
 
@@ -567,6 +681,7 @@ return render_template('student/total.html', data=data_dict, avginfo=avginfo, ro
   - https://www.pyimagesearch.com/2017/04/24/eye-blink-detection-opencv-python-dlib/
 - 활용 라이브러리
   - opencv, imutils, dlib
+- 얼굴 이미지를 분석하여 각 요소의 좌표값을 반환
 
 #### (2) 감정 분석
 
