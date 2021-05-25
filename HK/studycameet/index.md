@@ -11,10 +11,6 @@
 - 용우중 magoswj@gmail.com
 - 윤선미 yunseonmi97@naver.com
 
-#### 소스코드
-
-- https://github.com/w00j00ng/studycameet
-
 
 
 ## 1. 메뉴
