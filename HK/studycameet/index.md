@@ -683,9 +683,7 @@ def by_time():
 
 ## 5. 챗봇
 
-#### (1) 목적
-
-#### (2) 플로우차트
+#### (1) 플로우차트
 
 ![studycameet](.\chatbot_flowchart.png)
 
