@@ -100,40 +100,53 @@ while True:
 ```
 
 #### (3) 재생속도, 앞으로가기/뒤로가기 기능
-- v, b를 누르면 5초 앞, 뒤로 갈 수 있습니다
+- k, l를 누르면 5초 앞, 뒤로 갈 수 있습니다
 
   - 보고 시간을 조정하는 방법으로 구현했습니다
   - 키를 누르면 화면에 5초 앞으로가기/뒤로가기 문자가 잠깐 표시됩니다
 
-  - v :  5초 앞으로 가기
-  - b :  5초 뒤로 가기
+  - k :  5초 앞으로 가기
+  - l :  5초 뒤로 가기
 
 ```python
-    now_time = time.time()
-    if now_time - last_report_time > REPORT_DURATION / play_speed:
+last_report_time = time.time()
+part_time_modifier = 0
+
+while True:
+	now_time = time.time()
+    part_time = now_time - last_report_time
+    if part_time * play_speed + part_time_modifier > REPORT_DURATION:
         #--------생략--------#
         cambot_views.upload(report_data)
         #--------생략--------#
         last_report_time = now_time    
     #--------생략--------#
     key = cv2.waitKey(33)
-    if key == ord("v"):
-        cv2.putText(frame, "5 <<", (550, 410),
+    if key == ord("k"):
+        cv2.putText(frame, "5 <<", (400, 435),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        last_report_time -= 5
-    if key == ord("b"):
-        cv2.putText(frame, ">> 5", (550, 410),
+        part_time_modifier -= 5
+        if part_time + part_time_modifier < 0:
+            part_time_modifier += REPORT_DURATION
+            part_number -= 1
+            if part_number < 0:
+                part_number = 0
+    if key == ord("l"):
+        cv2.putText(frame, ">> 5", (400, 435),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        last_report_time += 5
+        part_time_modifier += 5
+        if part_time + part_time_modifier > REPORT_DURATION:
+            part_time_modifier -= REPORT_DURATION
+            part_number += 1
 ```
 
-- n, m을 누르면 강의 배속을 설정할 수 있습니다
+- h, j를 누르면 강의 배속을 설정할 수 있습니다
   - 보고주기를 조절하는 방법으로 구현했습니다
-  - n :  배속을 0.2 줄임 (최소 배속 0.4)
-  - m :  배속을 0.2 늘림 (최대 배속 2.0)
+  - h :  배속을 0.2 줄임 (최소 배속 0.4)
+  - j :  배속을 0.2 늘림 (최대 배속 2.0)
 
 ```python
-    if now_time - last_report_time > REPORT_DURATION / play_speed:
+    if part_time * play_speed + part_time_modifier > REPORT_DURATION:
         #--------생략--------#
         cambot_views.upload(report_data)
         #--------생략--------#
@@ -143,11 +156,12 @@ while True:
     #--------생략--------#
     key = cv2.waitKey(33)
     #--------생략--------#
-    if key == ord("n"):
+    if key == ord("h"):
         play_speed -= 0.2
         if play_speed < 0.4:
-           play_speed = 0.4
-    if key == ord("m"):
+            play_speed = 0.4
+
+    if key == ord("j"):
         play_speed += 0.2
         if play_speed > 2.0:
             play_speed = 2.0
@@ -332,30 +346,35 @@ while True:
 ```python
 @bp.route('/upload/', methods=["POST"])
 def upload(report):
-    rate_posture, rate_concentrate = 0, 0
-    rate_angry, rate_disgust, rate_fear, rate_happy, rate_sad = 0, 0, 0, 0, 0 
     #--------생략--------#
-    if report['loop_count'] != report['emotion_data']['No_Face']:
-        rate_posture = (report['eye_data'][0] + report['eye_data'][1]) / \
-                       (report['loop_count'] - report['emotion_data']['No_Face'])
-        rate_concentrate = 1 - report['eye_data'][0] / report['loop_count']
+
+    rate_posture, rate_concentrate = 0, 0
+    rate_angry, rate_disgust, rate_fear, rate_happy, rate_sad = 0, 0, 0, 0, 0
+
+    if g.user:
+        student_id = session.get('user_id')
+    rate_posture = (report['eye_data'][0] + report['eye_data'][1]) / report['loop_count']
+    if (report['eye_data'][0] + report['eye_data'][1]) != 0:
+        rate_concentrate = report['eye_data'][1] / (report['eye_data'][0] + report['eye_data'][1])
     if report['emotion_data']['Total'] != 0:
         rate_angry = report['emotion_data']['Angry'] / report['emotion_data']['Total']
         rate_disgust = report['emotion_data']['Disgust'] / report['emotion_data']['Total']
         rate_fear = report['emotion_data']['Fear'] / report['emotion_data']['Total']
         rate_happy = report['emotion_data']['Happy'] / report['emotion_data']['Total']
         rate_sad = report['emotion_data']['Sad'] / report['emotion_data']['Total']
-	lecture_part = report['report_count']
+
     total_loop = report['loop_count']
-	#--------생략--------#
-    lecture_part = report['report_count']
+
+    #--------생략--------#
     db.session.add(input_data)
+    print("======================data added======================")
+
     return redirect(url_for('cambot.index'))
 ```
 
-- 자세는 (정면 얼굴이 검출된 횟수) / (얼굴이 검출된 횟수)를 통해 도출합니다
-- 집중도는 1 - (눈을 감고 있던 횟수) / (캡쳐 횟수)를 통해 도출합니다
-- 각 감정의 정도는 (해당 감정이 검출된 횟수) / (전체 감정이 검출된 횟수)로 도출합니다
+- 자세는 정면 얼굴이 검출된 횟수에서 전체 횟수를 나누어 도출합니다
+- 집중도는 눈을 뜨고 있는 횟수에서 정면 얼굴이 검출된 횟수를 나누어 도출합니다
+- 각 감정의 정도는 해당 감정이 측정된 횟수에서 전체 감정이 측정된 횟수를 나누어 도출합니다
 
 #### (8) 데이터 업데이트
 
@@ -455,9 +474,9 @@ def get_grade(rate):
         grade = "아주좋음"
     elif rate > 0.6:
         grade = "좋음"
-    elif rate > 0.3:
+    elif rate > 0.4:
         grade = "보통"
-    elif rate > 0.1:
+    elif rate > 0.2:
         grade = "나쁨"
     else:
         grade = "아주나쁨"
@@ -483,12 +502,13 @@ def by_lecture():
         f"       , AVG(rate_fear) "
         f"       , AVG(rate_happy) "
         f"       , AVG(rate_sad) "
-        f"       , COUNT(*) "
+        f"       , COUNT (distinct student_id) "
         f"FROM     study_log "
         f"WHERE    teacher_id = {session.get('user_id')} "
         f"GROUP BY lecture_id "
         f"       , lecture_part "
-        f"ORDER BY id "
+        f"ORDER BY lecture_id "
+        f"       , lecture_part "
     )
     report = {}
     row_num = 0
@@ -507,7 +527,7 @@ def by_lecture():
             'max_emotion_rate': emotion_list[emotion_rank[0]],
             'second_emotion': emotion_label[emotion_rank[1]],
             'second_emotion_rate': emotion_list[emotion_rank[1]],
-            'count': row[9]
+            'student_count': row[9],
         }
         row_num += 1
     if row_num == 0:
@@ -517,7 +537,7 @@ def by_lecture():
 
 - 출력결과
 
-![teacher_report](.\teacher_report.png)
+![teacher_bylecture](.\teacher_bylecture.png)
 
 #### (2) 학생
 
@@ -542,8 +562,10 @@ def by_lecture():
         f"WHERE    student_id = {session.get('user_id')} "
         f"GROUP BY lecture_id "
         f"       , lecture_part "
-        f"ORDER BY id "
+        f"ORDER BY lecture_id "
+        f"       , lecture_part "
     )
+
     report = {}
     row_num, posture_sum, concentrate_sum = 0, 0, 0
     for row in data:
@@ -584,7 +606,7 @@ def by_date():
         f"FROM     study_log "
         f"WHERE    student_id = {session.get('user_id')} "
         f"GROUP BY create_date "
-        f"ORDER BY create_date "
+        f"ORDER BY create_date desc"
     )
     result = []
     for row in data:
@@ -673,23 +695,62 @@ def by_time():
 
 #### (1) 눈 상태 분석
 
+##### ◎  개요
+
 - 출처
-  - https://www.pyimagesearch.com/2017/04/24/eye-blink-detection-opencv-python-dlib/
+  https://www.pyimagesearch.com/2017/04/24/eye-blink-detection-opencv-python-dlib/
+
 - 활용 라이브러리
-  - opencv, imutils, dlib
+  opencv, imutils, dlib
+
 - 얼굴 이미지를 분석하여 각 요소의 좌표값을 반환
+
+##### ◎  일반적인 모델의 특징과 한계
+
+- 눈을 인식하고 그 중 하얀 부분(흰자)이 사라지면 눈을 감은 것으로 인식하는 방법
+- 눈 부분에서 하얀 색을 띈 좌표값을 모두 도출해야 하기 때문에 연산 부담이 큼
+- 동공의 크기, 홍채의 색, 눈의 크기 차이에 대한 반영이 없어 신뢰도가 낮음
+
+##### ◎  적용 모델의 특징과 장점
+
+- 눈의 테두리에서 6개의 좌표 추출
+- 6개 좌표를 통해 눈의 세로 길이, 가로 길이를 도출
+- 세로 길이와 가로 길이의 비율에 따라 감긴 정도를 판단
+- 동공의 크기, 홍채의 색에 구애받지 않고 결과를 도출할 수 있음
+- 6개 좌표에 대한 연산을 수행하기 때문에 연산 부담이 적음
+
+![img](./blink_detection_6_landmarks.jpg)
+
+![img](./blink_detection_equation.png)
+
+##### ◎  한계점
+
+- 얼굴이 정면을 향해 있을 때만 연산 가능
+- 얼굴이 측면을 향해 있을 때 얼굴 각 요소의 좌표값을 확보할 필요가 있음
+
+
 
 #### (2) 감정 분석
 
-- 데이터셋
-  - 출처: 캐글 데이터셋
+- 방법론
+  - 캐글 감정 분석 데이터셋 활용
     - https://www.kaggle.com/aayushmishra1512/emotion-detector
-  - 48 * 48 흑백사진 19,338건 중 트레이닝 데이터셋 18,072건, 테스트 데이터셋 1,266건으로 구성
-  - 6개 감정으로 분류 (슬픔, 중립, 행복, 불안, 우울, 분노)
+    - 트레이닝 이미지 18,072건, 테스트 이미지 1,266건 활용
+  - 감정을 6개로 구분하고 각 사진에 레이블값 부여
+    - angry, disgusted, fearful, happy, sad, neutral
+  - 사진과 레이블값을 기준으로 학습시킴
+  - 컨볼루션 레이어, 백스풀링 레이어 활용
+    - 컨볼루션 레이어를 활용하여 지역적 특징 도출
+    - 맥스풀링 레이어를 활용하여 동일 지역에서의 사소한 변화를 무시
+- 선정이유
+  - 화면의 세부적인 요소까지 연산을 하게 되면 프로그램 성능이 낮아질 우려가 있음
+  - 지역적 특징을 활용한 연산을 통해 연산 부담을 줄임
 - 학습방법
   - keras 딥러닝 라이브러리 활용
   - epoch: 60 / batch_size: 64 / lr = 0.001
-
+- 발전 방향
+  - 현재의 방법은 사진을 바로 학습시켜 결과를 예측하는 모형으로 얼굴 각 요소에 대한 고려가 없음
+  - 얼굴에서 눈, 입, 코 등의 각 요소를 분석하여 감정을 도출하는 모델로 발전시킬 필요가 있음
 - 모델
 
 ```sh
