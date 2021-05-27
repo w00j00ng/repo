@@ -649,8 +649,6 @@ def by_week():
     return render_template('student/by_week.html', report=report)
 ```
 
-![student_byweekday](.\student_byweekday.png)
-
 - 시간별 정보
 
 ![student_bytime](.\student_bytime.png)
